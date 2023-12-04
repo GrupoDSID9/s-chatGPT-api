@@ -121,15 +121,5 @@ output application/json
     </flow>
     <flow name="post:\chatGPT:application\json:s-chatgpt-api-config">
         <flow-ref doc:name="Flow Reference" doc:id="bd97641b-fdb5-4d01-86be-f1e373e6f861" name="implementationSub_Flow_Post" />
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "TranslatedText"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
     </flow>
 </mule>

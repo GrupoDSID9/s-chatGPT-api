@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+<mule xmlns:chatgpt="http://www.mulesoft.org/schema/mule/chatgpt" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd  http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/chatgpt http://www.mulesoft.org/schema/mule/chatgpt/current/mule-chatgpt.xsd">
     <http:listener-config name="s-chatgpt-api-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="${api.port}" />
     </http:listener-config>
     <apikit:config name="s-chatgpt-api-config" api="resource::6bfdfbd6-1d2e-4ffc-96e4-3a6ab65c6e06:s-chatgpt-api:1.0.5:raml:zip:s-chatgpt-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <global-property doc:name="Global Property" doc:id="d1cc6285-3078-456c-a485-3d976f96e73c" name="env" value="local" />
     <configuration-properties doc:name="Configuration properties" doc:id="62e54a98-2464-47dc-b085-75be07714c66" file="properties/${env}.yaml" />
-    <http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="4c8d4c7c-247d-4bf7-b49d-4b35df2d0c16">
-        <http:request-connection protocol="HTTPS" host="api.openai.com" />
-        <http:default-headers>
-            <http:default-header key="Authorization" value="Bearer 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" />
-        </http:default-headers>
-    </http:request-config>
+	<chatgpt:config name="ChatGPT_Config" doc:name="ChatGPT Config" doc:id="45adb5ba-bd39-476a-9008-6ecc2c4f063f" >
+		<chatgpt:connection apiKey="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" />
+	</chatgpt:config>
 </mule>

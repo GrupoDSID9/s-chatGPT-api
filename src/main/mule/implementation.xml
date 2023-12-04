@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:chatgpt="http://www.mulesoft.org/schema/mule/chatgpt" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/chatgpt http://www.mulesoft.org/schema/mule/chatgpt/current/mule-chatgpt.xsd">
 	<sub-flow name="implementationSub_Flow_Post" doc:id="24da0579-213f-4bd9-9f00-6e792db4d63c" >
 		<logger level="INFO" doc:name="Input Data" doc:id="c55ef04d-5517-459c-a2a6-f1fcf152befd" />
-		<ee:transform doc:name="Incluir params ChatGPT API" doc:id="e0561062-3964-46c5-8230-daa476b1fa64" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+		<ee:transform doc:name="Ajustar formato de petición" doc:id="f0171b86-6616-4620-8115-5d139968b482">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
-  "model": "gpt-3.5-turbo",
-  "messages": [
-     {
-	    "role": "user",
-        "content": payload.mensaje
-     }
-   ]
+	"role": "user",
+	"content": payload.mensaje
+
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<http:request method="POST" doc:name="ChatGPT Completion API Request" doc:id="614606c9-3ac0-45c9-a449-9959ef7b1658" path="/v1/chat/completions" config-ref="HTTP_Request_configuration"/>
+		<chatgpt:chat doc:name="Translate Message" doc:id="6e6e76f4-75a5-4299-a526-bdbe9f7560ff" config-ref="ChatGPT_Config"/>
 		<ee:transform doc:name="Seleccionar mensaje traducido" doc:id="67930662-782d-4c0c-967b-e637d3ee4cfb" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
