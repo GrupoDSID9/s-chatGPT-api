@@ -8,20 +8,20 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 http://www.mulesoft.org/schema/mule/chatgpt http://www.mulesoft.org/schema/mule/chatgpt/current/mule-chatgpt.xsd">
 	<sub-flow name="implementationSub_Flow_Post" doc:id="24da0579-213f-4bd9-9f00-6e792db4d63c" >
 		<logger level="INFO" doc:name="Input Data" doc:id="c55ef04d-5517-459c-a2a6-f1fcf152befd" />
-		<ee:transform doc:name="Ajustar formato de petición" doc:id="f0171b86-6616-4620-8115-5d139968b482">
+		<ee:transform doc:name="Modify request content" doc:id="f0171b86-6616-4620-8115-5d139968b482">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
 	"role": "user",
-	"content": payload.mensaje
+	"content": payload.message
 
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<chatgpt:chat doc:name="Translate Message" doc:id="6e6e76f4-75a5-4299-a526-bdbe9f7560ff" config-ref="ChatGPT_Config"/>
-		<ee:transform doc:name="Seleccionar mensaje traducido" doc:id="67930662-782d-4c0c-967b-e637d3ee4cfb" >
+		<ee:transform doc:name="Select translated text" doc:id="67930662-782d-4c0c-967b-e637d3ee4cfb" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json

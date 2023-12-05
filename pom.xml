@@ -53,13 +53,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>6bfdfbd6-1d2e-4ffc-96e4-3a6ab65c6e06</groupId>
-			<artifactId>s-chatgpt-api</artifactId>
-			<version>1.0.5</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
 			<groupId>com.mulesoft.connectors</groupId>
 			<artifactId>mule4-chatgpt-connector</artifactId>
 			<version>1.0.0</version>
@@ -70,6 +63,13 @@
 			<artifactId>mule-secure-configuration-property-module</artifactId>
 			<version>1.2.5</version>
 			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>6bfdfbd6-1d2e-4ffc-96e4-3a6ab65c6e06</groupId>
+			<artifactId>s-chatgpt-api</artifactId>
+			<version>1.0.6</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 
