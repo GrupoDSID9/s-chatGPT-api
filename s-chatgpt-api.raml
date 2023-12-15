@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: s-chatGPT-api
+description: System API for chatGPT
+mediaType:
+    - application/json
+version: "v1"
+protocols:
+    - HTTP
+
+types: #EN PROCESO
+  TranslateText:
+    type: object
+    properties:
+      message: string
+
+  
+
+# POST https://api.openai.com/v1/chat/completions
+/chatgpt:
+  post:
+    displayName: Translate
+    description: Sends the text to translate to ChatGPT expecting to receive its translation
+    body:
+      type: TranslateText
+    responses:
+      201:
+        body: 
+          application/json:
+            example:
+              message: TranslateText
+      400:
+        body:
+          type: string
+          example: "Bad Request"
+      401: #Error con la API Key
+        body:
+          type: string
+          example: "Invalid Authetication"
+      500:
+        body:
+          type: string
+          example: "Internal server error"
+      
+
+  
